@@ -1,0 +1,27 @@
+{
+  "private": true,
+  "name": "sls_ws_example_client",
+  "description": "Client for https://github.com/nicolomaioli/sls-ws-example",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nicolomaioli/sls-ws-example-client.git"
+  },
+  "scripts": {
+    "start": "live-server"
+  },
+  "author": "Nicolo Maioli",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nicolomaioli/sls-ws-example-client/issues"
+  },
+  "homepage": "https://nicolomaioli.github.io/sls-ws-example-client",
+  "devDependencies": {
+    "eslint": "^6.6.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.18.2",
+    "eslint-plugin-node": "^10.0.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "live-server": "^1.2.1"
+  }
+}
