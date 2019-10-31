@@ -34,5 +34,6 @@
     node.className = 'bg-success text-light mt-2 p-2 rounded w-50'
     node.textContent = message.data
     target.appendChild(node)
+    node.scrollIntoView({ behavior: 'smooth', block: 'end' })
   }
 })()
