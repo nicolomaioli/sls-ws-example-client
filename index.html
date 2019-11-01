@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <title>Serverless WebSocket Example</title>
+  <title>Serverless WebSocket Client</title>
 
   <style>
     html, body {
@@ -14,31 +14,36 @@
   </style>
 </head>
 <body>
-  <section class="container d-flex flex-column h-100">
-    <div class="row pt-2 pt-md-3 pt-lg-5">
-      <div class="col-12">
-          <h1>Serverless WebSocket Example</h1>
+  <main class="container-fluid p-0 d-flex flex-column h-100">
+    <header class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Serverless WebSocket Client</h1>
+        <p class="lead">A simple client for <a href="https://github.com/nicolomaioli/sls-ws-example">Serverless Websocket Example</a></p>
       </div>
-    </div>
+    </header>
 
-    <div class="row pt-2 pt-md-3 pt-lg-5 flex-grow-1 overflow-auto">
-      <div id="target" class="col-12">
+    <section class="container flex-grow-1 overflow-auto">
+      <div class="row pt-2 pt-md-3 pt-lg-5">
+        <div id="target" class="col-12">
+        </div>
       </div>
-    </div>
+    </section>
 
-    <div class="row py-2 py-md-3 py-lg-5">
-      <div class="col-12">
-        <form id="messageForm">
-          <div class="input-group mb-2">
-            <input type="text" class="form-control" id="message" placeholder="Write a message">
-            <div class="input-group-append">
-              <button id="sendMessage" type="submit" class="btn btn-primary">Send</button>
+    <section class="container">
+      <div class="row py-2 py-md-3 py-lg-5">
+        <div class="col-12">
+          <form id="messageForm">
+            <div class="input-group mb-2">
+              <input type="text" class="form-control" id="message" placeholder="Write a message">
+              <div class="input-group-append">
+                <button id="sendMessage" type="submit" class="btn btn-primary">Send</button>
+              </div>
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
   <script src="scripts/script.js"></script>
 </body>
