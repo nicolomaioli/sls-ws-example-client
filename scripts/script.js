@@ -7,7 +7,6 @@
   let connected = false
 
   ws.onopen = _event => {
-    console.log(`Connected to ${slsWsExample}`)
     connected = true
   }
 
