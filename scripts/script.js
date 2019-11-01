@@ -2,8 +2,8 @@
   'use strict'
 
   // Initialize WebSocket
-  const slsWsExample = 'wss://8yl33ihxd0.execute-api.eu-west-1.amazonaws.com/prod'
-  const ws = new WebSocket(slsWsExample)
+  const wsUrl = 'wss://8yl33ihxd0.execute-api.eu-west-1.amazonaws.com/prod'
+  const ws = new WebSocket(wsUrl)
 
   const state = {
     connected: false,
