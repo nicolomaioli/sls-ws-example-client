@@ -4,35 +4,87 @@
   // Initialize WebSocket
   const slsWsExample = 'wss://8yl33ihxd0.execute-api.eu-west-1.amazonaws.com/prod'
   const ws = new WebSocket(slsWsExample)
-  let connected = false
 
-  ws.onopen = _event => {
-    connected = true
+  const state = {
+    connected: false,
+    username: ''
+  }
+
+  ws.onopen = event => {
+    state.connected = true
+    const payload = JSON.stringify({ action: 'getUserInfo' })
+    ws.send(payload)
   }
 
   // Send message
-  const sendMessageBtn = document.querySelector('#sendMessage')
-  sendMessageBtn.addEventListener('click', event => {
+  const messageForm = document.querySelector('#messageForm')
+  const messageInput = document.querySelector('#message')
+  messageInput.value = ''
+  messageInput.focus()
+
+  messageForm.addEventListener('submit', event => {
     event.preventDefault()
 
-    if (connected) {
-      const message = document.querySelector('#message').value
+    if (state.connected) {
+      const message = messageInput.value
       const payload = {
         action: 'message',
         message
       }
 
       ws.send(JSON.stringify(payload))
+      messageInput.value = ''
+      messageInput.focus()
     }
   })
 
   // On message received, render message
-  const target = document.querySelector('#target')
-  ws.onmessage = message => {
+  const renderMessage = (target, username, message, action) => {
+    const flexContainer = document.createElement('div')
+    flexContainer.className = 'd-flex flex-column'
+
     const node = document.createElement('div')
-    node.className = 'bg-success text-light mt-2 p-2 rounded w-50'
-    node.textContent = message.data
-    target.appendChild(node)
+    node.className = 'mt-2 p-2 rounded'
+
+    if (username === state.username && action === 'MESSAGE') {
+      action = 'OWN_MESSAGE'
+    }
+
+    switch (action) {
+      case 'CONNECTED':
+        message = `<b>${username}</b> joined the channel`
+        node.className += ' text-success align-self-start'
+        break
+      case 'DISCONNECTED':
+        message = `<b>${username}</b> left the channel`
+        node.className += ' text-danger align-self-start'
+        break
+      case 'MESSAGE':
+        message = `<b>${username}</b></br>${message}`
+        node.className += ' bg-success text-light align-self-start'
+        break
+      case 'OWN_MESSAGE':
+        node.className += ' bg-primary text-light text-right align-self-end'
+        break
+      default:
+        break
+    }
+
+    node.innerHTML = message
+    flexContainer.appendChild(node)
+    target.appendChild(flexContainer)
     node.scrollIntoView({ behavior: 'smooth', block: 'end' })
+  }
+
+  ws.onmessage = incoming => {
+    const target = document.querySelector('#target')
+    const { username, action, message } = JSON.parse(incoming.data)
+
+    if (action === 'INFO') {
+      state.username = username
+      return
+    }
+
+    renderMessage(target, username, message, action)
   }
 })()
