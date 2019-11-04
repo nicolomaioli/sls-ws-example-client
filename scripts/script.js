@@ -17,10 +17,20 @@
   }
 
   // Send message
+  const focusInput = node => {
+    const mobileRegexp = /android|webos|iphone|ipad|ipod|blackberry/i
+
+    if (!mobileRegexp.test(navigator.userAgent)) {
+      // Naive don't focus on mobile
+      node.focus()
+    }
+  }
+
   const messageForm = document.querySelector('#messageForm')
   const messageInput = document.querySelector('#message')
   messageInput.value = ''
-  messageInput.focus()
+
+  focusInput(messageInput)
 
   messageForm.addEventListener('submit', event => {
     event.preventDefault()
@@ -34,7 +44,8 @@
 
       ws.send(JSON.stringify(payload))
       messageInput.value = ''
-      messageInput.focus()
+
+      focusInput(messageInput)
     }
   })
 
