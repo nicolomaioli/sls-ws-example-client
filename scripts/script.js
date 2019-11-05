@@ -62,6 +62,10 @@
     }
 
     switch (action) {
+      case 'INFO':
+        message = `Successfully connected as <b>${username}</b>`
+        node.className += ' text-success align-self-start'
+        break
       case 'CONNECTED':
         message = `<b>${username}</b> joined the channel`
         node.className += ' text-success align-self-start'
@@ -93,7 +97,6 @@
 
     if (action === 'INFO') {
       state.username = username
-      return
     }
 
     renderMessage(target, username, message, action)
